@@ -50,7 +50,13 @@ public class Main {
         smokeSensor1.subscribe(declenchementAlarme2);
         smokeSensor1.subscribe(declenchementAlarme3);
 
-        smokeSensor1.simulateDetectionEvent();
+        
         smokeSensor2.simulateDetectionEvent();
+
+
+        smokeSensor1.unsubscribe(declenchementAlarme2);
+
+        smokeSensor1.simulateDetectionEvent();
+
     }
 }
