@@ -7,18 +7,20 @@ import java.util.List;
 
 public class SmokeSensor implements Publisher{
     private List<Observer> observers = new ArrayList<>();
+    @Override
     public void simulateDetectionEvent() {
         System.out.println("smoke detected");
+        notifySubscribers();
     }
-
+    @Override
     public void subscribe(Observer observer) {
         observers.add(observer);
     }
-
+    @Override
     public void unsubscribe(Observer observer){
         observers.remove(observer);
     }
-
+    @Override
     public void notifySubscribers() {
         String message = "SmokeSensor activated";
         for (Observer observer : observers) {
