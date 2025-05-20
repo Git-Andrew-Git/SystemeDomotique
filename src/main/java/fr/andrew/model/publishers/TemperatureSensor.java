@@ -8,9 +8,22 @@ import java.util.List;
 public class TemperatureSensor implements Publisher  {
     private List<Observer> observers = new ArrayList<>();
 
+    private int id;
+
+    public TemperatureSensor(int id) {
+        this.id = id;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public void simulateDetectionEvent() {
-        System.out.println("Temperature haut detected");
+        System.out.println("Temperature haut detected in detector #" + getId());
         notifySubscribers();
     }
 
@@ -29,7 +42,7 @@ public class TemperatureSensor implements Publisher  {
     public void notifySubscribers() {
         String message = "TemperatureSensor activated";
         for (Observer observer : observers) {
-            observer.update(message);
+            observer.update(getId() + message);
         }
     }
 }

@@ -8,9 +8,22 @@ import java.util.List;
 public class NO2Sensor implements Publisher  {
     private List<Observer> observers = new ArrayList<>();
 
+    private int id;
+
+    public NO2Sensor(int id) {
+        this.id = id;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public void simulateDetectionEvent() {
-        System.out.println("NO2 detected");
+        System.out.println("NO2 detected in detector #" + getId());
         notifySubscribers();
     }
 
@@ -29,7 +42,7 @@ public class NO2Sensor implements Publisher  {
     public void notifySubscribers() {
         String message = "NO2Sensor activated";
         for (Observer observer : observers) {
-            observer.update(message);
+            observer.update(getId() + message);
         }
     }
 }

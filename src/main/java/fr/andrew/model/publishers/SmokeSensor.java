@@ -7,9 +7,26 @@ import java.util.List;
 
 public class SmokeSensor implements Publisher{
     private List<Observer> observers = new ArrayList<>();
+    private int id;
+
+    public SmokeSensor(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+
+
     @Override
     public void simulateDetectionEvent() {
-        System.out.println("smoke detected");
+        System.out.println("smoke detected in detector #" + getId());
         notifySubscribers();
     }
     @Override
@@ -24,7 +41,7 @@ public class SmokeSensor implements Publisher{
     public void notifySubscribers() {
         String message = "SmokeSensor activated";
         for (Observer observer : observers) {
-            observer.update(message);
+            observer.update(getId() + message);
         }
     }
 
